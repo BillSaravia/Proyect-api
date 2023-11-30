@@ -3,7 +3,7 @@ import exppress from "express";
 import {
   createProductCtrl,
   getProductsCtrl,
-  //getProductCtrl,
+  getProductCtrl,
   //updateProductCtrl,
   //deleteProductCtrl,
 } from "../controllers/productsCtrl.js"
@@ -22,7 +22,7 @@ productsRouter.post(
 );
 
 productsRouter.get("/", getProductsCtrl);
-// productsRouter.get("/:id", getProductCtrl);
+productsRouter.get("/:id", getProductCtrl);
 // productsRouter.put("/:id", isLoggedIn, isAdmin, updateProductCtrl);
 // productsRouter.delete("/:id/delete", isLoggedIn, isAdmin, deleteProductCtrl);
 export default productsRouter;
