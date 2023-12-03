@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
-// import Brand from "../model/Brand.js";
-// import Category from "../model/Category.js";
+import Brand from "../model/Brand.js";
+import Category from "../model/Category.js";
 import Product from "../model/Product.js";
 
 // @desc    Create new product
@@ -28,15 +28,16 @@ export const createProductCtrl = asyncHandler(async (req, res) => {
 //       "Brand not found, please create brand first or check brand name"
 //     );
 //   }
-//   //find the category
-//   const categoryFound = await Category.findOne({
-//     name: category,
-//   });
-//   if (!categoryFound) {
-//     throw new Error(
-//       "Category not found, please create category first or check category name"
-//     );
-//   }
+  //find the category
+  const categoryFound = await Category.findOne({
+    name: category,
+  });
+  if (!categoryFound) {
+    throw new Error(
+      "Category not found, please create category first or check category name"
+    );
+  }
+  
   //create the product
   const product = await Product.create({
     name,
@@ -51,10 +52,10 @@ export const createProductCtrl = asyncHandler(async (req, res) => {
     //images: convertedImgs,
   });
   //push the product into category
-//   categoryFound.products.push(product._id);
-//   //resave
-//   await categoryFound.save();
-//   //push the product into brand
+  categoryFound.products.push(product._id);
+  //resave
+  await categoryFound.save();
+  //push the product into brand
 //   brandFound.products.push(product._id);
 //   //resave
 //   await brandFound.save();
@@ -184,57 +185,57 @@ export const getProductCtrl = asyncHandler(async (req, res) => {
   });
 });
 
-// // @desc    update  product
-// // @route   PUT /api/products/:id/update
-// // @access  Private/Admin
+// @desc    update  product
+// @route   PUT /api/products/:id/update
+// @access  Private/Admin
 
-// export const updateProductCtrl = asyncHandler(async (req, res) => {
-//   const {
-//     name,
-//     description,
-//     category,
-//     sizes,
-//     colors,
-//     user,
-//     price,
-//     totalQty,
-//     brand,
-//   } = req.body;
-//   //validation
+export const updateProductCtrl = asyncHandler(async (req, res) => {
+  const {
+    name,
+    description,
+    category,
+    sizes,
+    colors,
+    user,
+    price,
+    totalQty,
+    brand,
+  } = req.body;
+  //validation
 
-//   //update
-//   const product = await Product.findByIdAndUpdate(
-//     req.params.id,
-//     {
-//       name,
-//       description,
-//       category,
-//       sizes,
-//       colors,
-//       user,
-//       price,
-//       totalQty,
-//       brand,
-//     },
-//     {
-//       new: true,
-//       runValidators: true,
-//     }
-//   );
-//   res.json({
-//     status: "success",
-//     message: "Product updated successfully",
-//     product,
-//   });
-// });
+  //update
+  const product = await Product.findByIdAndUpdate(
+    req.params.id,
+    {
+      name,
+      description,
+      category,
+      sizes,
+      colors,
+      user,
+      price,
+      totalQty,
+      brand,
+    },
+    {
+      new: true,
+      //runValidators: true,
+    }
+  );
+  res.json({
+    status: "success",
+    message: "Product updated successfully",
+    product,
+  });
+});
 
-// // @desc    delete  product
-// // @route   DELETE /api/products/:id/delete
-// // @access  Private/Admin
-// export const deleteProductCtrl = asyncHandler(async (req, res) => {
-//   await Product.findByIdAndDelete(req.params.id);
-//   res.json({
-//     status: "success",
-//     message: "Product deleted successfully",
-//   });
-// });
+// @desc    delete  product
+// @route   DELETE /api/products/:id/delete
+// @access  Private/Admin
+export const deleteProductCtrl = asyncHandler(async (req, res) => {
+  await Product.findByIdAndDelete(req.params.id);
+  res.json({
+    status: "success",
+    message: "Product deleted successfully",
+  });
+});
