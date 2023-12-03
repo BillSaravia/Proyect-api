@@ -71,4 +71,3 @@ const UserShema = new Schema(
 const User = mongoose.model("User", UserShema);
 
 export default User;
-//mongodb+srv://billsaravia:YkijgpFWgQOjPGJ2@nodejs-apiecommerce.jhce08v.mongodb.net/?retryWrites=true&w=majority
