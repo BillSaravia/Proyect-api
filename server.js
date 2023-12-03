@@ -6,5 +6,3 @@ const PORT = process.env.PORT || 2030;
 const server = http.createServer(app);
 server.listen(PORT, console.log(`Server is up and running on port ${PORT}`));
 
-
-//mongodb+srv://billsaravia:YkijgpFWgQOjPGJ2@nodejs-apiecommerce.jhce08v.mongodb.net/?retryWrites=true&w=majority
