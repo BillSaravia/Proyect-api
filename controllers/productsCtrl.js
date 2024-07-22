@@ -149,10 +149,7 @@ export const getProductsCtrl = asyncHandler(async (req, res) => {
   }
 
   //await the query
-  //const products = await productQuery.populate("reviews");
-
-  const products = await productQuery;
-
+  const products = await productQuery.populate("reviews");
   res.json({
     status: "success",
     total,
@@ -168,7 +165,7 @@ export const getProductsCtrl = asyncHandler(async (req, res) => {
 // @access  Public
 
 export const getProductCtrl = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id)//.populate({
+  const product = await Product.findById(req.params.id).populate("reviews");
   //   path: "reviews",
   //   populate: {
   //     path: "user",
